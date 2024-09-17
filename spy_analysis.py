@@ -84,7 +84,7 @@ def analyze_spy():
     # Output to CSV
     output_dir = '/app/output'
     os.makedirs(output_dir, exist_ok=True)
-    result_file = os.path.join(output_dir, 'result_analysis_results.csv')
+    result_file = os.path.join(output_dir, 'spy_analysis.csv')
     result_df.to_csv(result_file,index = False)
 
     # Print summary
@@ -96,17 +96,23 @@ def analyze_spy():
     std_difference = result_df['Avg Difference'].std()
     max_difference = result_df['Avg Difference'].max()
     min_difference = result_df['Avg Difference'].min()
+    wins = (result_df['Friday Average'] >= result_df['Put Sold']).sum()
+    losses = (result_df['Friday Average'] < result_df['Put Sold']).sum()
+    max_losses = (result_df['Friday Average'] < result_df['Put Buy']).sum()
     remaining_cash = cash + result_df['Gain/Loss'].sum()
     print(f"\nSummary:")
     print(f"Total Wednesday-Friday pairs analyzed: {total_comparisons}")
     print(f"Positive differences (Friday > Wednesday): {positive_count} ({positive_count/total_comparisons:.2%})")
     print(f"Negative differences (Friday < Wednesday): {negative_count} ({negative_count/total_comparisons:.2%})")
-    print(f"\nMean difference: {mean_difference:.2f}")
-    print(f"\nMedian difference: {median_difference:.2f}")
-    print(f"\nStdDev difference: {std_difference:.2f}")
-    print(f"\nMax difference: {max_difference:.2f}")
-    print(f"\nMin difference: {min_difference:.2f}")
-    print(f"\nCash remainder: ${remaining_cash:.2f}")
+    print(f"Mean difference: {mean_difference:.2f}")
+    print(f"Median difference: {median_difference:.2f}")
+    print(f"StdDev difference: {std_difference:.2f}")
+    print(f"Max difference: {max_difference:.2f}")
+    print(f"Min difference: ${min_difference:.2f}")
+    print(f"Wins: {wins}")
+    print(f"Losses: {losses}")
+    print(f"Max Losses: {max_losses}")
+    print(f"Cash remainder: ${remaining_cash:.2f}")
 
 if __name__ == "__main__":
     analyze_spy()
