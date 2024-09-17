@@ -22,6 +22,4 @@ Containerized as I'm having issues with loading pandas module directly.
 
 Todo:
 - Input variables
-- dataframe optimization
-- Use a different data set that includes either average or lowest prices for the day instead of closing price
 
