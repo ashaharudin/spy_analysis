@@ -19,7 +19,7 @@ def analyze_spy():
 
     # Calculate date range (last 3 months)
     end_date = datetime.now()
-    start_date = end_date - timedelta(days=1460)
+    start_date = end_date - timedelta(days=3650)
 
     # Download SPY data
     spy = yf.Ticker("SPY")
@@ -79,7 +79,7 @@ def analyze_spy():
             default=PREMIUM
         ))
 
-    print(result_df.to_string(index=False))
+    #print(result_df.to_string(index=False))
 
     # Output to CSV
     output_dir = '/app/output'
